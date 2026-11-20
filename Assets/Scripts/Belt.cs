@@ -14,6 +14,8 @@ public class Belt : MonoBehaviour
              "Import with Mesh Type = Full Rect so they can tile.")]
     [SerializeField] Sprite[] beltFrames;
     [SerializeField] Sprite grabMarkerSprite;
+    [Tooltip("Above the chips, so the marker stays visible when it locks onto one")]
+    [SerializeField] int grabMarkerOrder = 3;
     [SerializeField] Sprite cornerCapSprite;
     [SerializeField] int beltSortingOrder = 0;
     [SerializeField] float pixelsPerUnit = 16f;
@@ -46,6 +48,7 @@ public class Belt : MonoBehaviour
 
     readonly List<SpriteRenderer> beltSides = new();
     readonly List<int> incoming = new();
+    SpriteRenderer grabMarker;
     ChipView[] slots;
     float offset;
     float spawnTimer;
@@ -123,7 +126,18 @@ public class Belt : MonoBehaviour
             if (slots[i] != null) slots[i].transform.position = SlotPosition(i);
 
         UpdateIncoming();
+        UpdateGrabMarker();
         AnimateBelt();
+    }
+
+    void UpdateGrabMarker()
+    {
+        if (grabMarker == null) return;
+        int s = SlotAtGrab();
+        bool locked = s >= 0 && slots[s] != null && !incoming.Contains(s);
+        Vector3 p = locked ? slots[s].transform.position : GrabPoint;
+        p.z = 0f;
+        grabMarker.transform.position = p;
     }
 
     void UpdateIncoming()
@@ -262,8 +276,8 @@ public class Belt : MonoBehaviour
         }
         if (grabMarkerSprite != null)
         {
-            var marker = MakeSprite("Grab Marker", grabMarkerSprite, new Vector3(0f, -hh), 0f, null);
-            marker.sortingOrder = beltSortingOrder + 1;
+            grabMarker = MakeSprite("Grab Marker", grabMarkerSprite, new Vector3(0f, -hh), 0f, null);
+            grabMarker.sortingOrder = grabMarkerOrder;
         }
     }
 
