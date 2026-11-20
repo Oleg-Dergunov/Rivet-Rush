@@ -200,7 +200,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ChipsGreen
+      name: ChipGreen
       rect:
         serializedVersion: 2
         x: 16
@@ -327,10 +327,10 @@ TextureImporter:
     nameFileIdTable:
       ChipBlue: 5247816500109422983
       ChipBurnt: -88540882
+      ChipGreen: 1552729125
       ChipRainbow: -1867380302
       ChipRed: 528880255
       ChipYellow: -917458850
-      ChipsGreen: 1552729125
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
