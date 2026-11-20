@@ -23,6 +23,8 @@ public class BlueprintBoard : MonoBehaviour
 
     readonly List<List<ChipColor>> blueprints = new();
     readonly List<GameObject> rows = new();
+    IReadOnlyList<ChipData> lastTray;
+    bool initialized;
 
     int Capacity => panels.Length * 2;
 
@@ -32,7 +34,20 @@ public class BlueprintBoard : MonoBehaviour
         int count = Mathf.Min(blueprintCount, Capacity);
         for (int i = 0; i < count; i++)
             blueprints.Add(Generate(i));
+        initialized = true;
         Redraw(null);
+    }
+
+    public void SetCount(int count)
+    {
+        blueprintCount = count;
+        if (!initialized) return;
+
+        count = Mathf.Min(count, Capacity);
+        if (blueprints.Count >= count) return;
+        while (blueprints.Count < count)
+            blueprints.Add(Generate(blueprints.Count));
+        Redraw(lastTray);
     }
 
     public bool Accepts(IReadOnlyList<ChipData> tray, ChipData next)
@@ -59,6 +74,7 @@ public class BlueprintBoard : MonoBehaviour
 
     public void Redraw(IReadOnlyList<ChipData> tray)
     {
+        lastTray = tray;
         foreach (var r in rows) Destroy(r);
         rows.Clear();
 

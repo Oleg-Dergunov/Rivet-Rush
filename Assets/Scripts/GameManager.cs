@@ -6,9 +6,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] Belt belt;
     [SerializeField] BlueprintBoard board;
+    [SerializeField] Difficulty difficulty;
 
     [Header("Rules")]
-    [SerializeField, Range(2, 4)] int colorsInPlay = 3;
     [SerializeField] int pointsPerChip = 10;
     [Tooltip("Ignore presses for this long after game over, so the fatal press doesn't restart instantly")]
     [SerializeField] float restartDelay = 0.75f;
@@ -32,17 +32,15 @@ public class GameManager : MonoBehaviour
     public event System.Action<int> StreakBroken;
 
     const string BestKey = "RivetRush.Best";
-    int score, streak, best;
+    int score, streak, best, built;
     float gameOverTime;
 
     void Start()
     {
         best = PlayerPrefs.GetInt(BestKey, 0);
-
-        belt.colorsInPlay = colorsInPlay;
-        board.colorsInPlay = colorsInPlay;
         belt.OnJam += GameOver;
 
+        difficulty.Begin();
         board.Init();
         belt.Begin();
 
@@ -59,6 +57,7 @@ public class GameManager : MonoBehaviour
 
     public void BlueprintBuilt(int length)
     {
+        built++;
         streak++;
         int multiplier = MultiplierFor(streak);
         int gained = length * pointsPerChip * multiplier;
@@ -69,6 +68,7 @@ public class GameManager : MonoBehaviour
             if (streak == streakThresholds[i]) bonusReached = multiplier;
 
         ScoreGained?.Invoke(gained, bonusReached);
+        difficulty.OnBlueprintsBuilt(built);
         UpdateHud();
     }
 
