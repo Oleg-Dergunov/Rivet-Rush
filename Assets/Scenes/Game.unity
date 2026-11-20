@@ -230,6 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 356889975}
   - component: {fileID: 356889974}
+  - component: {fileID: 356889976}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -251,7 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   belt: {fileID: 1783337260}
   board: {fileID: 342978874}
-  colorsInPlay: 3
+  difficulty: {fileID: 356889976}
   pointsPerChip: 10
   restartDelay: 0.75
   streakThresholds: 050000000a00000014000000
@@ -275,6 +276,111 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &356889976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 356889973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16a09a9ccc2b06e4e8828f30e82f158b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Difficulty
+  belt: {fileID: 1783337260}
+  board: {fileID: 342978874}
+  levels:
+  - announce: 
+    blueprintsNeeded: 0
+    beltSpeed: 1.5
+    spawnInterval: 2.8
+    burntChance: 0
+    rainbowChance: 0
+    blueprintCount: 2
+    minLength: 3
+    maxLength: 3
+    colorsInPlay: 3
+  - announce: Faster!
+    blueprintsNeeded: 3
+    beltSpeed: 1.7
+    spawnInterval: 2.6
+    burntChance: 0
+    rainbowChance: 0
+    blueprintCount: 2
+    minLength: 3
+    maxLength: 3
+    colorsInPlay: 3
+  - announce: Burnt chips!
+    blueprintsNeeded: 6
+    beltSpeed: 1.95
+    spawnInterval: 2.4
+    burntChance: 0.08
+    rainbowChance: 0
+    blueprintCount: 2
+    minLength: 3
+    maxLength: 3
+    colorsInPlay: 3
+  - announce: New blueprint!
+    blueprintsNeeded: 10
+    beltSpeed: 2.15
+    spawnInterval: 2.2
+    burntChance: 0.08
+    rainbowChance: 0
+    blueprintCount: 3
+    minLength: 3
+    maxLength: 4
+    colorsInPlay: 3
+  - announce: Rainbow chips!
+    blueprintsNeeded: 15
+    beltSpeed: 2.4
+    spawnInterval: 2
+    burntChance: 0.1
+    rainbowChance: 0.06
+    blueprintCount: 3
+    minLength: 3
+    maxLength: 4
+    colorsInPlay: 3
+  - announce: New colour!
+    blueprintsNeeded: 20
+    beltSpeed: 2.6
+    spawnInterval: 1.8
+    burntChance: 0.1
+    rainbowChance: 0.06
+    blueprintCount: 3
+    minLength: 3
+    maxLength: 4
+    colorsInPlay: 4
+  - announce: Bigger blueprints!
+    blueprintsNeeded: 26
+    beltSpeed: 2.85
+    spawnInterval: 1.6
+    burntChance: 0.12
+    rainbowChance: 0.07
+    blueprintCount: 4
+    minLength: 4
+    maxLength: 5
+    colorsInPlay: 4
+  - announce: Faster!
+    blueprintsNeeded: 33
+    beltSpeed: 3.05
+    spawnInterval: 1.4
+    burntChance: 0.12
+    rainbowChance: 0.07
+    blueprintCount: 4
+    minLength: 4
+    maxLength: 5
+    colorsInPlay: 4
+  - announce: Faster!
+    blueprintsNeeded: 40
+    beltSpeed: 3.3
+    spawnInterval: 1.2
+    burntChance: 0.14
+    rainbowChance: 0.08
+    blueprintCount: 4
+    minLength: 4
+    maxLength: 5
+    colorsInPlay: 4
 --- !u!1 &370511225
 GameObject:
   m_ObjectHideFlags: 0
@@ -5910,6 +6016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScorePopups
   game: {fileID: 356889974}
+  difficulty: {fileID: 356889976}
   prefab: {fileID: 1603773387888695570, guid: 5c1d2be8e3480bd4699d9dca236c419e, type: 3}
   container: {fileID: 763216744}
   worldTarget: {fileID: 1961668412}
@@ -5917,6 +6024,8 @@ MonoBehaviour:
   bonusFormat: Streak bonus *{0}!
   brokenText: Streak broken
   brokenColor: {r: 0.8313726, g: 0.2392157, b: 0.2392157, a: 1}
+  levelColor: {r: 0.9137255, g: 0.54509807, b: 0.22745098, a: 1}
+  levelDelay: 0.6
 --- !u!1 &1961668411
 GameObject:
   m_ObjectHideFlags: 0

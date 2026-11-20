@@ -3,6 +3,7 @@
 public class ScorePopups : MonoBehaviour
 {
     [SerializeField] GameManager game;
+    [SerializeField] Difficulty difficulty;
     [SerializeField] FloatingText prefab;
     [SerializeField] RectTransform container;
     [SerializeField] Transform worldTarget;
@@ -15,6 +16,10 @@ public class ScorePopups : MonoBehaviour
     [SerializeField] string brokenText = "Streak broken";
     [SerializeField] Color brokenColor = new Color32(0xB1, 0x3E, 0x53, 0xFF);
 
+    [Header("Level up")]
+    [SerializeField] Color levelColor = new Color32(0x73, 0xEF, 0xF7, 0xFF);
+    [SerializeField] float levelDelay = 0.6f;
+
     Camera cam;
 
     void Awake() => cam = container.GetComponentInParent<Canvas>().worldCamera;
@@ -23,29 +28,33 @@ public class ScorePopups : MonoBehaviour
     {
         game.ScoreGained += ShowPoints;
         game.StreakBroken += ShowBroken;
+        if (difficulty) difficulty.LevelStarted += ShowLevel;
     }
 
     void OnDisable()
     {
         game.ScoreGained -= ShowPoints;
         game.StreakBroken -= ShowBroken;
+        if (difficulty) difficulty.LevelStarted -= ShowLevel;
     }
 
     void ShowPoints(int points, int bonusReached)
     {
         string text = $"+{points}";
         if (bonusReached > 0) text += "\n" + string.Format(bonusFormat, bonusReached);
-        Spawn(text, pointsColor);
+        Spawn(text, pointsColor, 0f);
     }
 
-    void ShowBroken(int lostStreak) => Spawn(brokenText, brokenColor);
+    void ShowBroken(int lostStreak) => Spawn(brokenText, brokenColor, 0f);
 
-    void Spawn(string text, Color color)
+    void ShowLevel(string announce) => Spawn(announce, levelColor, levelDelay);
+
+    void Spawn(string text, Color color, float delay)
     {
         Vector2 screen = RectTransformUtility.WorldToScreenPoint(cam, worldTarget.position);
         RectTransformUtility.ScreenPointToLocalPointInRectangle(container, screen, cam, out Vector2 local);
 
         FloatingText ft = Instantiate(prefab, container);
-        ft.Init(text, color, local, 0f);
+        ft.Init(text, color, local, delay);
     }
 }
