@@ -10,8 +10,6 @@ public class GameManager : MonoBehaviour
 
     [Header("Rules")]
     [SerializeField] int pointsPerChip = 10;
-    [Tooltip("Ignore presses for this long after game over, so the fatal press doesn't restart instantly")]
-    [SerializeField] float restartDelay = 0.75f;
 
     [Header("Streak")]
     [Tooltip("Streak length where each multiplier starts, lowest first")]
@@ -23,36 +21,65 @@ public class GameManager : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] TMP_Text hudText;
-    [SerializeField] GameObject gameOverPanel;
-    [SerializeField] TMP_Text gameOverText;
+
+    public static bool AutoStart;
 
     public bool IsPlaying { get; private set; }
+    public bool HasStarted { get; private set; }
+    public bool IsPaused { get; private set; }
+    public int StartFrame { get; private set; } = -1;
+    public int Score => score;
+
     public event System.Action GameEnded;
     public event System.Action<int, int> ScoreGained;
     public event System.Action<int> StreakBroken;
 
-    const string BestKey = "RivetRush.Best";
-    int score, streak, best, built;
-    float gameOverTime;
+    int score, streak, built;
 
-    void Start()
+    void Awake()
     {
-        best = PlayerPrefs.GetInt(BestKey, 0);
+        Time.timeScale = 1f;
         belt.OnJam += GameOver;
+    }
+
+    void Start() => UpdateHud();
+
+    public void StartGame()
+    {
+        if (HasStarted) return;
+        HasStarted = true;
+        StartFrame = Time.frameCount;
 
         difficulty.Begin();
         board.Init();
         belt.Begin();
 
-        if (gameOverPanel) gameOverPanel.SetActive(false);
         IsPlaying = true;
         UpdateHud();
     }
 
-    void Update()
+    public void Restart()
     {
-        if (!IsPlaying && Time.time - gameOverTime > restartDelay && OneButton.Pressed)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        AutoStart = true;
+        Reload();
+    }
+
+    public void ToMenu()
+    {
+        AutoStart = false;
+        Reload();
+    }
+
+    public void SetPaused(bool paused)
+    {
+        IsPaused = paused;
+        Time.timeScale = paused ? 0f : 1f;
+    }
+
+    void Reload()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void BlueprintBuilt(int length)
@@ -91,21 +118,8 @@ public class GameManager : MonoBehaviour
     {
         if (!IsPlaying) return;
         IsPlaying = false;
-        gameOverTime = Time.time;
         belt.Stop();
-
-        bool newBest = score > best;
-        if (newBest)
-        {
-            best = score;
-            PlayerPrefs.SetInt(BestKey, best);
-            PlayerPrefs.Save();
-        }
-
         GameEnded?.Invoke();
-        if (gameOverPanel) gameOverPanel.SetActive(true);
-        if (gameOverText)
-            gameOverText.text = $"BELT JAMMED\n\nScore {score}\nBest {best}{(newBest ? "  NEW!" : "")}\n\nPress to try again";
         UpdateHud();
     }
 
