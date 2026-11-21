@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -12,6 +13,8 @@ public class ChipView : MonoBehaviour
     SpriteRenderer sr;
     Sprite defaultSprite;
     bool isOnTop;
+
+    const float PixelsPerUnit = 16f;
 
     public ChipData Data { get; private set; }
 
@@ -46,5 +49,26 @@ public class ChipView : MonoBehaviour
         Color c = sr.color;
         c.a = a;
         sr.color = c;
+    }
+
+    public void Vanish(Vector3 drift, float duration) => StartCoroutine(VanishRoutine(drift, duration));
+
+    IEnumerator VanishRoutine(Vector3 drift, float duration)
+    {
+        Vector3 start = transform.position;
+        float startAlpha = sr.color.a;
+        float t = 0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float k = Mathf.Clamp01(t / duration);
+            Vector3 p = start + drift * (k * k);
+            p.x = Mathf.Round(p.x * PixelsPerUnit) / PixelsPerUnit;
+            p.y = Mathf.Round(p.y * PixelsPerUnit) / PixelsPerUnit;
+            transform.position = p;
+            SetAlpha(startAlpha * (1f - k));
+            yield return null;
+        }
+        Destroy(gameObject);
     }
 }

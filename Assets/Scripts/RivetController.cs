@@ -18,6 +18,11 @@ public class RivetController : MonoBehaviour
     [SerializeField] Transform trayAnchor;
     [SerializeField] float trayIconSpacing = 1f;
 
+    [Header("Effects")]
+    [Tooltip("How far the chips of a finished blueprint rise while they fade")]
+    [SerializeField] float builtRise = 0.5f;
+    [SerializeField] float builtFadeTime = 0.4f;
+
     public event Action PickedUp;
     public event Action Built;
     public event Action Fumbled;
@@ -46,7 +51,7 @@ public class RivetController : MonoBehaviour
 
         if (chip.kind == ChipKind.Burnt)
         {
-            belt.Take(slot);
+            belt.Discard(slot);
             if (tray.Count > 0) Fumble();
             else PickedUp?.Invoke();
             return;
@@ -59,23 +64,29 @@ public class RivetController : MonoBehaviour
         }
 
         tray.Add(belt.Take(slot));
+        RefreshTray();
+
         int done = board.FindCompleted(tray);
         if (done >= 0)
         {
             game.BlueprintBuilt(board.Complete(done));
             tray.Clear();
+            foreach (var icon in trayIcons) icon.Vanish(Vector3.up * builtRise, builtFadeTime);
+            trayIcons.Clear();
+            board.Redraw(tray);
             Built?.Invoke();
         }
         else
         {
             PickedUp?.Invoke();
         }
-        RefreshTray();
     }
 
     void Fumble()
     {
-        bool fit = belt.DropAfterGrab(tray);
+        var from = new List<Vector3>();
+        foreach (var icon in trayIcons) from.Add(icon.transform.position);
+        bool fit = belt.DropAfterGrab(tray, from);
         tray.Clear();
         RefreshTray();
         game.BreakStreak();
