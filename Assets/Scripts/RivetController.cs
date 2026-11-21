@@ -34,7 +34,7 @@ public class RivetController : MonoBehaviour
 
     void Update()
     {
-        if (game.IsPlaying && OneButton.Pressed) Grab();
+        if (game.IsPlaying && !game.IsPaused && Time.frameCount > game.StartFrame && OneButton.Pressed) Grab();
     }
 
     void Grab()
