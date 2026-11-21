@@ -26,7 +26,7 @@ public class Belt : MonoBehaviour
     [SerializeField] float dropHeight = 1f;
     [SerializeField, Range(0.25f, 2f)] float dropSlots = 1f;
 
-    [Header("Tuning (GameManager will drive these later)")]
+    [Header("Tuning (set by Difficulty at runtime)")]
     public float speed = 2f;
     [Range(0.1f, 0.5f)] public float grabWindow = 0.45f;
     public float spawnInterval = 1.5f;
@@ -34,17 +34,53 @@ public class Belt : MonoBehaviour
     [Range(0f, 1f)] public float rainbowChance = 0f;
     [HideInInspector] public int colorsInPlay = 3;
 
+    [Header("Effects")]
+    [SerializeField] float discardDrop = 0.75f;
+    [SerializeField] float discardTime = 0.5f;
+    [SerializeField]
+    AnimationCurve blinkCurve = new AnimationCurve(
+        new Keyframe(0f, 1f), new Keyframe(0.4f, 0.1f), new Keyframe(0.5f, 0.1f), new Keyframe(0.8f, 1f));
+
+    [Header("Fumble animation")]
+    [SerializeField] float flyTime = 0.35f;
+    [SerializeField] float flyStagger = 0.05f;
+    [SerializeField] float flyArc = 0.5f;
+    [SerializeField] float shiftTime = 0.25f;
+
+    class Move
+    {
+        public bool fromTray;
+        public Vector3 fromWorld;
+        public float lag;
+        public float start;
+        public float delay;
+        public float duration;
+    }
+
+    struct Carried
+    {
+        public ChipView view;
+        public int fromSlot;
+        public float prevLag;
+        public Vector3 fromWorld;
+        public float delay;
+    }
+
     public event Action OnJam;
     public event Action Dispensed;
 
     readonly List<SpriteRenderer> beltSides = new();
     readonly List<int> incoming = new();
+    readonly Dictionary<int, Move> moves = new();
+    readonly List<int> moveKeys = new();
     SpriteRenderer grabMarker;
     ChipView[] slots;
     float offset;
     float spawnTimer;
     int pending;
     bool running;
+    bool blinking;
+    float blinkStart;
 
     const float DepthStep = 0.001f;
 
@@ -64,6 +100,7 @@ public class Belt : MonoBehaviour
         spawnTimer = 0f;
         pending = 0;
         incoming.Clear();
+        moves.Clear();
 
         int n = Mathf.Clamp(startingChips, 0, slotCount);
         for (int k = 0; k < n; k++)
@@ -72,11 +109,24 @@ public class Belt : MonoBehaviour
         running = true;
     }
 
-    public void Stop() => running = false;
+    public void Stop()
+    {
+        running = false;
+        blinking = true;
+        blinkStart = Time.time;
+    }
 
     void Update()
     {
-        if (!running) return;
+        if (!running)
+        {
+            moveKeys.Clear();
+            moveKeys.AddRange(moves.Keys);
+            foreach (int i in moveKeys)
+                if (slots[i] != null) slots[i].transform.position = MovingPosition(i);
+            if (blinking) Blink();
+            return;
+        }
 
         float delta = speed * Time.deltaTime;
         float prevOffset = offset;
@@ -114,7 +164,10 @@ public class Belt : MonoBehaviour
         }
 
         for (int i = 0; i < slotCount; i++)
-            if (slots[i] != null) slots[i].transform.position = SlotPosition(i);
+        {
+            if (slots[i] == null) continue;
+            slots[i].transform.position = moves.ContainsKey(i) ? MovingPosition(i) : SlotPosition(i);
+        }
 
         UpdateIncoming();
         UpdateGrabMarker();
@@ -148,6 +201,48 @@ public class Belt : MonoBehaviour
         }
     }
 
+    Vector3 MovingPosition(int i)
+    {
+        Move m = moves[i];
+        float k = Mathf.Clamp01((Time.time - m.start - m.delay) / m.duration);
+        float e = 1f - (1f - k) * (1f - k);
+
+        if (k >= 1f)
+        {
+            moves.Remove(i);
+            if (m.fromTray) slots[i].SetOnTop(false);
+            return SlotPosition(i);
+        }
+
+        if (m.fromTray)
+        {
+            Vector3 p = Vector3.Lerp(m.fromWorld, SlotPosition(i), e);
+            p.y += flyArc * 4f * k * (1f - k);
+            return p;
+        }
+
+        float u = i + offset - m.lag * (1f - e);
+        Vector3 q = PointOnPath(Mathf.Repeat(u, slotCount) / slotCount);
+        q.z = Mathf.Repeat(u - GrabPos, slotCount) * DepthStep;
+        return q;
+    }
+
+    float RemainingLag(int i)
+    {
+        if (!moves.TryGetValue(i, out Move m) || m.fromTray) return 0f;
+        float k = Mathf.Clamp01((Time.time - m.start - m.delay) / m.duration);
+        float e = 1f - (1f - k) * (1f - k);
+        return m.lag * (1f - e);
+    }
+
+    void Blink()
+    {
+        float length = blinkCurve.keys[blinkCurve.length - 1].time;
+        float a = blinkCurve.Evaluate(Mathf.Repeat(Time.time - blinkStart, length));
+        foreach (var s in slots)
+            if (s != null) s.SetAlpha(a);
+    }
+
     void AnimateBelt()
     {
         if (beltFrames == null || beltFrames.Length == 0) return;
@@ -177,26 +272,63 @@ public class Belt : MonoBehaviour
         ChipData d = slots[i].Data;
         Destroy(slots[i].gameObject);
         slots[i] = null;
+        moves.Remove(i);
         return d;
     }
 
-    public bool DropAfterGrab(IReadOnlyList<ChipData> chips)
+    public void Discard(int i)
+    {
+        ChipView v = slots[i];
+        slots[i] = null;
+        moves.Remove(i);
+        v.Vanish(Vector3.down * discardDrop, discardTime);
+    }
+
+    public bool DropAfterGrab(IReadOnlyList<ChipData> chips, IReadOnlyList<Vector3> fromPositions)
     {
         if (chips.Count == 0) return true;
 
-        var empty = new List<int>();
-        for (int i = 0; i < slotCount; i++)
-            if (slots[i] == null) empty.Add(i);
-
         float start = GrabPos + grabWindow;
-        empty.Sort((a, b) =>
+        var order = new List<int>();
+        for (int i = 0; i < slotCount; i++)
+            if (!incoming.Contains(i)) order.Add(i);
+        order.Sort((a, b) =>
             Mathf.Repeat(a + offset - start, slotCount).CompareTo(Mathf.Repeat(b + offset - start, slotCount)));
 
-        int placed = Mathf.Min(chips.Count, empty.Count);
-        for (int k = 0; k < placed; k++)
-            Place(empty[k], chips[k]);
+        var queue = new Queue<Carried>();
+        for (int k = 0; k < chips.Count; k++)
+        {
+            ChipView v = Instantiate(chipPrefab, transform);
+            v.Set(chips[k]);
+            v.transform.position = fromPositions[k];
+            v.SetOnTop(true);
+            queue.Enqueue(new Carried { view = v, fromSlot = -1, fromWorld = fromPositions[k], delay = k * flyStagger });
+        }
 
-        return placed == chips.Count;
+        foreach (int s in order)
+        {
+            if (queue.Count == 0) break;
+
+            if (slots[s] != null)
+            {
+                if (moves.TryGetValue(s, out Move old) && old.fromTray) slots[s].SetOnTop(false);
+                queue.Enqueue(new Carried { view = slots[s], fromSlot = s, prevLag = RemainingLag(s) });
+                moves.Remove(s);
+            }
+
+            Carried next = queue.Dequeue();
+            slots[s] = next.view;
+
+            if (next.fromSlot < 0)
+                moves[s] = new Move { fromTray = true, fromWorld = next.fromWorld, start = Time.time, delay = next.delay, duration = flyTime };
+            else
+                moves[s] = new Move { lag = Mathf.Repeat(s - next.fromSlot, slotCount) + next.prevLag, start = Time.time, duration = shiftTime };
+        }
+
+        bool fit = queue.Count == 0;
+        while (queue.Count > 0)
+            queue.Dequeue().view.Vanish(Vector3.down * discardDrop, discardTime);
+        return fit;
     }
 
     void Place(int i, ChipData d)
