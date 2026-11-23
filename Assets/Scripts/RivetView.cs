@@ -129,7 +129,8 @@ public class RivetView : MonoBehaviour
         else
             move.y = Mathf.Repeat(Time.time * bobRate, 1f) < 0.5f ? 0f : px;
 
-        asideT = Mathf.MoveTowards(asideT, aside ? 1f : 0f, Time.unscaledDeltaTime / asideTime);
+        float dt = Mathf.Min(Time.unscaledDeltaTime, 1f / 30f);
+        asideT = Mathf.MoveTowards(asideT, aside ? 1f : 0f, dt / asideTime);
         float e = asideT * asideT * (3f - 2f * asideT);
         Vector3 p = basePos + asideOffset * e + move;
         p.x = Mathf.Round(p.x * pixelsPerUnit) / pixelsPerUnit;
