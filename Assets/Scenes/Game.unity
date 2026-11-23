@@ -256,6 +256,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477222}
   m_CullTransparentMesh: 1
+--- !u!1 &79090964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 79090965}
+  - component: {fileID: 79090966}
+  - component: {fileID: 79090967}
+  m_Layer: 5
+  m_Name: Circle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &79090965
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79090964}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 771875925}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 7, y: 7}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &79090966
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79090964}
+  m_CullTransparentMesh: 1
+--- !u!114 &79090967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79090964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 8220c133e3527ef4587297f748a3e5e6, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &203407912
 GameObject:
   m_ObjectHideFlags: 0
@@ -2124,6 +2199,81 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582819102}
   m_CullTransparentMesh: 1
+--- !u!1 &583065884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 583065885}
+  - component: {fileID: 583065887}
+  - component: {fileID: 583065886}
+  m_Layer: 5
+  m_Name: Track
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &583065885
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583065884}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1313845772}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &583065886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583065884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.54509807, g: 0.5764706, b: 0.654902, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &583065887
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583065884}
+  m_CullTransparentMesh: 1
 --- !u!1 &611523980
 GameObject:
   m_ObjectHideFlags: 0
@@ -2925,13 +3075,14 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 79090965}
   m_Father: {fileID: 1535308773}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: 20}
+  m_SizeDelta: {x: 7, y: 7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &771875926
 CanvasRenderer:
@@ -2954,15 +3105,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 0}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3774,29 +3925,93 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque facilisis
-    leo orci, et sodales orci tincidunt non. Aenean nunc felis, finibus in imperdiet
-    vel, congue quis nisi. Ut ullamcorper quam et nisi viverra eleifend. Nam tristique,
-    eros eu sagittis suscipit, erat ligula porta ligula, eget condimentum sem urna
-    nec tortor. Pellentesque ut commodo nibh, suscipit elementum sem. Cras fermentum,
-    felis sed dignissim ultrices, elit lorem lobortis tellus, at ultrices risus velit
-    a velit. Fusce ac volutpat eros, ut suscipit lacus. In ut massa tempor, pharetra
-    metus non, porttitor magna.
+  m_text: 'The goal in <color=#3B5DC9>Rivet Rush</color> is to complete blueprints
+    from the board(s) before the conveyor belt fills up completely.
 
     
 
-    Aenean quis condimentum ipsum, laoreet
-    auctor risus. Donec elementum, augue non pretium elementum, diam ipsum tempus
-    sapien, cursus bibendum purus mauris in orci. Vestibulum fermentum et tellus
-    eget hendrerit. Praesent tristique nunc non congue accumsan. Morbi ornare tempor
-    velit eu lacinia. Proin dignissim vehicula finibus. Etiam vulputate sagittis
-    orci in consectetur. Vivamus hendrerit elit ut lobortis bibendum. Nulla a finibus
-    nulla, a vehicula turpis. Proin sit amet mauris augue. Nam urna leo, sagittis
-    nec egestas sit amet, fermentum id ligula. Aliquam erat volutpat. Fusce ornare,
-    lorem sit amet pulvinar dignissim, lacus leo suscipit ipsum, sed ultricies nulla
-    ligula sed eros. Class aptent taciti sociosqu ad litora torquent per conubia
-    nostra, per inceptos himenaeos. Ut scelerisque nisi vitae nisl aliquam, ut pretium
-    tellus maximus. Mauris venenatis quam nec tellus pretium, a laoreet orci dapibus.'
+    The
+    main character, an assembly robot named <color=#3B5DC9>Rivet</color>, can interact
+    with the chips on the conveyor belt directly in front of him. Use the <color=#3B5DC9>"Space"</color>
+    key, a mouse <color=#3B5DC9>click</color>, or a <color=#3B5DC9>screen tap</color>
+    to perform an action.
+
+    
+
+    -Keep an eye on the blueprints at the top
+    of the screen; they indicate exactly which chips are required and the order in
+    which they must be collected.
+
+    -Press the button when the desired chip reaches
+    the pickup zone in front of Rivet.
+
+    -Let unnecessary chips pass by - they
+    will loop back around.
+
+    -Complete a blueprint according to the board to
+    earn points. Successfully complete multiple blueprints in a row to earn a "streak"
+    bonus.
+
+    -Don''t make mistakes! If you grab a wrong chip or try to pick something
+    up from an empty slot, Rivet will drop everything currently on his tray back
+    onto the conveyor belt, and your streak will be broken.
+
+    -The game gradually
+    becomes faster and more challenging. Keep up the pace and try to score higher
+    than the top players.
+
+    -If the conveyor belt becomes completely full and
+    there is no room left for a new chip, the mechanism will jam, and the game will
+    end.
+
+    
+
+    <color=#3B5DC9>Types of Chips</color>
+
+    
+
+    <align=center><size=250%><sprite
+    name="ChipRed"> <sprite name="ChipBlue"> <sprite name="ChipGreen"></size></align>
+
+
+    
+
+    <color=#3B5DC9>Coloured
+    chips:</color> Red, blue, and green chips are used to complete blueprints.
+
+    
+
+    <align=center><size=250%><sprite
+    name="ChipYellow"></size></align>
+
+
+    
+
+    Yellow chips are added to the
+    mix later on.
+
+    
+
+    <align=center><size=250%><sprite name="ChipBurnt"></size></align>
+
+
+    
+
+    <color=#3B5DC9>Burnt
+    chip:</color> This is junk that takes up space on your belt. Interact with it
+    to destroy it. If your tray is empty, this action is free; however, if there
+    are already chips on the tray, attempting to destroy a burnt chip will count
+    as a mistake.
+
+    
+
+    <align=center><size=250%><sprite name="ChipRainbow"></size></align>
+
+
+    
+
+    <color=#3B5DC9>Rainbow
+    chip:</color> This can act as a substitute for a chip of any colour.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cbc89946fa764a44cb1048ff2aa5067b, type: 2}
   m_sharedMaterial: {fileID: -2840717597666584653, guid: cbc89946fa764a44cb1048ff2aa5067b, type: 2}
@@ -3815,7 +4030,7 @@ MonoBehaviour:
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
     bottomRight: {r: 1, g: 1, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
+  m_spriteAsset: {fileID: 11400000, guid: fcd570f89eee7274e987cd5816d54119, type: 2}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
   m_TextStyleHashCode: -1183493901
@@ -4525,11 +4740,11 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 771875927}
+  m_TargetGraphic: {fileID: 79090967}
   m_HandleRect: {fileID: 771875925}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.09433814
+  m_Size: 0.07999893
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4546,13 +4761,14 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 583065885}
   - {fileID: 1535308773}
   m_Father: {fileID: 1640788631}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 20, y: -0.0000038147}
+  m_SizeDelta: {x: 7, y: -0.0000038147}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1313845773
 MonoBehaviour:
@@ -4567,7 +4783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5399,6 +5615,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1535308773}
+  - component: {fileID: 1535308775}
+  - component: {fileID: 1535308774}
   m_Layer: 5
   m_Name: Sliding Area
   m_TagString: Untagged
@@ -5424,8 +5642,46 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20, y: -20}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1535308774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535308772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1535308775
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535308772}
+  m_CullTransparentMesh: 1
 --- !u!1 &1557017961
 GameObject:
   m_ObjectHideFlags: 0
