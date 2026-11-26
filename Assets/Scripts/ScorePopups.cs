@@ -41,7 +41,7 @@ public class ScorePopups : MonoBehaviour
     void ShowPoints(int points, int bonusReached)
     {
         string text = $"+{points}";
-        if (bonusReached > 0) text += "\n" + string.Format(bonusFormat, bonusReached);
+        if (bonusReached > 0) text = string.Format(bonusFormat, bonusReached) + "\n" + text;
         Spawn(text, pointsColor, 0f);
     }
 

@@ -98,7 +98,7 @@ public class Belt : MonoBehaviour
         slots = new ChipView[slotCount];
         offset = 0f;
         spawnTimer = 0f;
-        pending = 0;
+        pending = 1;
         incoming.Clear();
         moves.Clear();
 
@@ -146,7 +146,8 @@ public class Belt : MonoBehaviour
             {
                 if (slots[i] != null) continue;
                 float prev = Mathf.Repeat(i + prevOffset, slotCount);
-                if (Mathf.Repeat(claimPoint - prev, slotCount) <= delta)
+                float dist = Mathf.Repeat(claimPoint - prev, slotCount);
+                if (dist > 0f && dist <= delta)
                 {
                     Place(i, RandomChip());
                     slots[i].SetOnTop(true);

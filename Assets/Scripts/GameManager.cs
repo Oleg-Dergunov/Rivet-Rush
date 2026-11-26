@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     [Header("Streak")]
     [SerializeField] int[] streakThresholds = { 5, 10, 20 };
     [SerializeField] int[] streakMultipliers = { 2, 3, 5 };
-    [SerializeField] int streakBrokenMin = 1;
 
     [Header("UI")]
     [SerializeField] TMP_Text hudText;
@@ -98,7 +97,7 @@ public class GameManager : MonoBehaviour
 
     public void BreakStreak()
     {
-        if (streak >= streakBrokenMin) StreakBroken?.Invoke(streak);
+        if (MultiplierFor(streak) > 1) StreakBroken?.Invoke(streak);
         streak = 0;
         UpdateHud();
     }

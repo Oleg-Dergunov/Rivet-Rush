@@ -16,6 +16,7 @@ public class BlueprintBoard : MonoBehaviour
     [SerializeField] float cellSpacing = 1f;
     [SerializeField] float rowSpacing = 1.1875f;
     [SerializeField, Range(0f, 1f)] float doneAlpha = 0.3f;
+    [SerializeField, Range(0f, 1f)] float blockedAlpha = 0.3f;
 
     readonly List<List<ChipColor>> blueprints = new();
     readonly List<GameObject> rows = new();
@@ -83,12 +84,14 @@ public class BlueprintBoard : MonoBehaviour
             rows.Add(row);
 
             bool onTrack = filled > 0 && IsPrefix(blueprints[b], tray, null);
+            bool blocked = filled > 0 && !onTrack;
             for (int k = 0; k < blueprints[b].Count; k++)
             {
                 ChipView icon = Instantiate(iconPrefab, row.transform);
                 icon.transform.localPosition = new Vector3(k * cellSpacing, 0f, 0f);
                 icon.Set(ChipData.Normal(blueprints[b][k]));
-                if (onTrack && k < filled) icon.SetAlpha(doneAlpha);
+                if (blocked) icon.SetAlpha(blockedAlpha);
+                else if (onTrack && k < filled) icon.SetAlpha(doneAlpha);
             }
         }
     }
