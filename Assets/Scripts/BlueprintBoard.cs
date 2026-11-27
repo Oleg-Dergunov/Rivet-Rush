@@ -114,6 +114,14 @@ public class BlueprintBoard : MonoBehaviour
 
     List<ChipColor> Generate(int replacingIndex)
     {
+        List<ChipColor> bp = GenerateRandom(replacingIndex);
+        for (int attempt = 0; attempt < 50 && Clashes(bp, replacingIndex); attempt++)
+            bp = GenerateRandom(replacingIndex);
+        return bp;
+    }
+
+    List<ChipColor> GenerateRandom(int replacingIndex)
+    {
         int length = Random.Range(minLength, maxLength + 1);
         var bp = new List<ChipColor>(length);
 
@@ -130,6 +138,23 @@ public class BlueprintBoard : MonoBehaviour
         }
         return bp;
     }
+
+    bool Clashes(List<ChipColor> bp, int skipIndex)
+    {
+        for (int b = 0; b < blueprints.Count; b++)
+            if (b != skipIndex && (StartsWith(bp, blueprints[b]) || StartsWith(blueprints[b], bp)))
+                return true;
+        return false;
+    }
+
+    static bool StartsWith(List<ChipColor> longer, List<ChipColor> shorter)
+    {
+        if (shorter.Count > longer.Count) return false;
+        for (int k = 0; k < shorter.Count; k++)
+            if (longer[k] != shorter[k]) return false;
+        return true;
+    }
+
 
     bool UsedElsewhere(ChipColor c, int skipIndex)
     {

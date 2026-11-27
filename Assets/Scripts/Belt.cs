@@ -269,6 +269,8 @@ public class Belt : MonoBehaviour
         return true;
     }
 
+    public Vector3 ChipPosition(int i) => slots[i].transform.position;
+
     public ChipData Take(int i)
     {
         ChipData d = slots[i].Data;

@@ -17,13 +17,14 @@ public class RivetController : MonoBehaviour
     [SerializeField] float trayIconSpacing = 1f;
 
     [Header("Effects")]
+    [SerializeField] float pickupFlyTime = 0.2f;
+    [SerializeField] float pickupArc = 0.6f;
     [SerializeField] float builtRise = 0.5f;
     [SerializeField] float builtFadeTime = 0.4f;
 
     public event Action PickedUp;
     public event Action Built;
     public event Action Fumbled;
-
     public event Action BurntDestroyed;
 
     readonly List<ChipData> tray = new();
@@ -63,15 +64,17 @@ public class RivetController : MonoBehaviour
             return;
         }
 
+        Vector3 from = belt.ChipPosition(slot);
         tray.Add(belt.Take(slot));
         RefreshTray();
+        trayIcons[trayIcons.Count - 1].FlyFrom(from, pickupFlyTime, pickupArc);
 
         int done = board.FindCompleted(tray);
         if (done >= 0)
         {
             game.BlueprintBuilt(board.Complete(done));
             tray.Clear();
-            foreach (var icon in trayIcons) icon.Vanish(Vector3.up * builtRise, builtFadeTime);
+            foreach (var icon in trayIcons) icon.Vanish(Vector3.up * builtRise, builtFadeTime, pickupFlyTime);
             trayIcons.Clear();
             board.Redraw(tray);
             Built?.Invoke();

@@ -49,10 +49,37 @@ public class ChipView : MonoBehaviour
         sr.color = c;
     }
 
-    public void Vanish(Vector3 drift, float duration) => StartCoroutine(VanishRoutine(drift, duration));
-
-    IEnumerator VanishRoutine(Vector3 drift, float duration)
+    public void FlyFrom(Vector3 worldFrom, float duration, float arc)
     {
+        Vector3 localTarget = transform.localPosition;
+        transform.position = worldFrom;
+        StartCoroutine(FlyRoutine(worldFrom, localTarget, duration, arc));
+    }
+
+    IEnumerator FlyRoutine(Vector3 from, Vector3 localTarget, float duration, float arc)
+    {
+        float t = 0f;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float k = Mathf.Clamp01(t / duration);
+            float e = 1f - (1f - k) * (1f - k);
+            Vector3 to = transform.parent.TransformPoint(localTarget);
+            Vector3 p = Vector3.Lerp(from, to, e);
+            p.y += arc * 4f * k * (1f - k);
+            transform.position = Snap(p);
+            yield return null;
+        }
+        transform.localPosition = localTarget;
+    }
+
+    public void Vanish(Vector3 drift, float duration, float delay = 0f) =>
+        StartCoroutine(VanishRoutine(drift, duration, delay));
+
+    IEnumerator VanishRoutine(Vector3 drift, float duration, float delay)
+    {
+        if (delay > 0f) yield return new WaitForSeconds(delay);
+
         Vector3 start = transform.position;
         float startAlpha = sr.color.a;
         float t = 0f;
@@ -60,13 +87,17 @@ public class ChipView : MonoBehaviour
         {
             t += Time.deltaTime;
             float k = Mathf.Clamp01(t / duration);
-            Vector3 p = start + drift * (k * k);
-            p.x = Mathf.Round(p.x * PixelsPerUnit) / PixelsPerUnit;
-            p.y = Mathf.Round(p.y * PixelsPerUnit) / PixelsPerUnit;
-            transform.position = p;
+            transform.position = Snap(start + drift * (k * k));
             SetAlpha(startAlpha * (1f - k));
             yield return null;
         }
         Destroy(gameObject);
+    }
+
+    static Vector3 Snap(Vector3 p)
+    {
+        p.x = Mathf.Round(p.x * PixelsPerUnit) / PixelsPerUnit;
+        p.y = Mathf.Round(p.y * PixelsPerUnit) / PixelsPerUnit;
+        return p;
     }
 }

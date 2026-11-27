@@ -72,4 +72,5 @@ public class GameSounds : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(name)) AudioManager.PlaySound(name);
     }
+
 }

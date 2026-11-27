@@ -47,13 +47,13 @@ public class Difficulty : MonoBehaviour
 {
         new DifficultyLevel(0,  1.5f,  2.8f, 2, 3, 3, 3, 0f,    0f,    ""),
         new DifficultyLevel(3,  1.7f,  2.6f, 2, 3, 3, 3, 0f,    0f,    "Faster!"),
-        new DifficultyLevel(6,  1.95f, 2.4f, 2, 3, 3, 3, 0.08f, 0f,    "Burnt chips!"),
-        new DifficultyLevel(10, 2.15f, 2.2f, 3, 3, 4, 3, 0.08f, 0f,    "New blueprint!"),
-        new DifficultyLevel(15, 2.4f,  2.0f, 3, 3, 4, 3, 0.10f, 0.06f, "Rainbow chips!"),
-        new DifficultyLevel(20, 2.6f,  1.8f, 3, 3, 4, 4, 0.10f, 0.06f, "New colour!"),
-        new DifficultyLevel(26, 2.85f, 1.6f, 4, 4, 5, 4, 0.12f, 0.07f, "Bigger blueprints!"),
-        new DifficultyLevel(33, 3.05f, 1.4f, 4, 4, 5, 4, 0.12f, 0.07f, "Faster!"),
-        new DifficultyLevel(40, 3.3f,  1.2f, 4, 4, 5, 4, 0.14f, 0.08f, "Faster!"),
+        new DifficultyLevel(6,  1.95f, 2.4f, 2, 3, 3, 3, 0.06f, 0f,    "Burnt chips!"),
+        new DifficultyLevel(10, 2.15f, 2.2f, 3, 3, 4, 3, 0.06f, 0f,    "New blueprint!"),
+        new DifficultyLevel(15, 2.4f,  2.0f, 3, 3, 4, 3, 0.08f, 0.06f, "Rainbow chips!"),
+        new DifficultyLevel(20, 2.6f,  1.8f, 3, 3, 4, 4, 0.08f, 0.06f, "New colour!"),
+        new DifficultyLevel(26, 2.85f, 1.6f, 4, 4, 5, 4, 0.10f, 0.08f, "Bigger blueprints!"),
+        new DifficultyLevel(33, 3.05f, 1.4f, 4, 4, 5, 4, 0.10f, 0.08f, "Faster!"),
+        new DifficultyLevel(40, 3.3f,  1.2f, 4, 4, 5, 4, 0.12f, 0.10f, "Faster!"),
     };
 
     public event Action<string> LevelStarted;

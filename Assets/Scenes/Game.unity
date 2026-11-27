@@ -825,7 +825,7 @@ MonoBehaviour:
     blueprintsNeeded: 6
     beltSpeed: 1.95
     spawnInterval: 2.4
-    burntChance: 0.08
+    burntChance: 0.06
     rainbowChance: 0
     blueprintCount: 2
     minLength: 3
@@ -835,7 +835,7 @@ MonoBehaviour:
     blueprintsNeeded: 10
     beltSpeed: 2.15
     spawnInterval: 2.2
-    burntChance: 0.08
+    burntChance: 0.06
     rainbowChance: 0
     blueprintCount: 3
     minLength: 3
@@ -845,7 +845,7 @@ MonoBehaviour:
     blueprintsNeeded: 15
     beltSpeed: 2.4
     spawnInterval: 2
-    burntChance: 0.1
+    burntChance: 0.08
     rainbowChance: 0.06
     blueprintCount: 3
     minLength: 3
@@ -855,7 +855,7 @@ MonoBehaviour:
     blueprintsNeeded: 20
     beltSpeed: 2.6
     spawnInterval: 1.8
-    burntChance: 0.1
+    burntChance: 0.08
     rainbowChance: 0.06
     blueprintCount: 3
     minLength: 3
@@ -865,8 +865,8 @@ MonoBehaviour:
     blueprintsNeeded: 26
     beltSpeed: 2.85
     spawnInterval: 1.6
-    burntChance: 0.12
-    rainbowChance: 0.07
+    burntChance: 0.1
+    rainbowChance: 0.08
     blueprintCount: 4
     minLength: 4
     maxLength: 5
@@ -875,8 +875,8 @@ MonoBehaviour:
     blueprintsNeeded: 33
     beltSpeed: 3.05
     spawnInterval: 1.4
-    burntChance: 0.12
-    rainbowChance: 0.07
+    burntChance: 0.1
+    rainbowChance: 0.08
     blueprintCount: 4
     minLength: 4
     maxLength: 5
@@ -885,8 +885,8 @@ MonoBehaviour:
     blueprintsNeeded: 40
     beltSpeed: 3.3
     spawnInterval: 1.2
-    burntChance: 0.14
-    rainbowChance: 0.08
+    burntChance: 0.12
+    rainbowChance: 0.1
     blueprintCount: 4
     minLength: 4
     maxLength: 5
@@ -1520,6 +1520,7 @@ MonoBehaviour:
   gameOver: GameOver
   newRecord: NewRecord
   click: Click
+  hover: Hover
 --- !u!4 &466676578
 Transform:
   m_ObjectHideFlags: 0
@@ -2713,7 +2714,7 @@ MonoBehaviour:
   sounds:
   - name: Music
     clip: {fileID: 8300000, guid: 4957bd551ca01444f82164056cb567a5, type: 3}
-    volume: 0.3
+    volume: 0.4
     pitch: 1
     pitchVariation: 0
     loop: 1
@@ -2804,6 +2805,14 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     pitchVariation: 0
+    loop: 0
+    playOnStart: 0
+    source: {fileID: 0}
+  - name: Hover
+    clip: {fileID: 8300000, guid: 0be28c9cc08977d4690551be7098a509, type: 3}
+    volume: 0.5
+    pitch: 1
+    pitchVariation: 0.1
     loop: 0
     playOnStart: 0
     source: {fileID: 0}
@@ -5111,7 +5120,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 90.5, y: -6.5}
+  m_AnchoredPosition: {x: 88, y: -6.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1242902670
@@ -5604,6 +5613,8 @@ MonoBehaviour:
   trayIconPrefab: {fileID: 5531765302557476626, guid: 8f88a5035b8b1884d812c166fbf412e5, type: 3}
   trayAnchor: {fileID: 1607882021}
   trayIconSpacing: 1
+  pickupFlyTime: 0.2
+  pickupArc: 0.6
   builtRise: 0.5
   builtFadeTime: 0.4
 --- !u!4 &1395376373
@@ -12975,7 +12986,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 45.5, y: -15}
+  m_AnchoredPosition: {x: 48.5, y: -16}
   m_SizeDelta: {x: 11, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2137304790
