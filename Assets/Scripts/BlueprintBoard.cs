@@ -62,6 +62,13 @@ public class BlueprintBoard : MonoBehaviour
         return -1;
     }
 
+    public bool Needs(ChipColor c)
+    {
+        foreach (var bp in blueprints)
+            if (bp.Contains(c)) return true;
+        return false;
+    }
+
     public int Complete(int index)
     {
         int length = blueprints[index].Count;

@@ -20,6 +20,7 @@ public class Belt : MonoBehaviour
     [Header("Slots")]
     [SerializeField] int slotCount = 38;
     [SerializeField] ChipView chipPrefab;
+    [SerializeField] BlueprintBoard board;
     [SerializeField] int startingChips = 10;
 
     [Header("Dispenser drop")]
@@ -149,8 +150,8 @@ public class Belt : MonoBehaviour
                 float dist = Mathf.Repeat(claimPoint - prev, slotCount);
                 if (dist > 0f && dist <= delta)
                 {
-                    Place(i, RandomChip());
-                    slots[i].SetOnTop(true);
+                    Place(i, NextDispensed());
+                    slots[i].SetOnTop(true); 
                     incoming.Add(i);
                     pending--;
                     Dispensed?.Invoke();
@@ -353,6 +354,32 @@ public class Belt : MonoBehaviour
         if (r < burntChance) return new ChipData(ChipKind.Burnt);
         if (r < burntChance + rainbowChance) return new ChipData(ChipKind.Rainbow);
         return ChipData.Normal((ChipColor)Random.Range(0, colorsInPlay));
+    }
+
+    ChipData NextDispensed()
+    {
+        ChipColor? missing = MissingColor();
+        return missing.HasValue ? ChipData.Normal(missing.Value) : RandomChip();
+    }
+
+    ChipColor? MissingColor()
+    {
+        if (board == null) return null;
+
+        var present = new bool[4];
+        foreach (var s in slots)
+        {
+            if (s == null) continue;
+            if (s.Data.kind == ChipKind.Rainbow) return null;
+            if (s.Data.kind == ChipKind.Normal) present[(int)s.Data.color] = true;
+        }
+
+        var missing = new List<ChipColor>();
+        for (int c = 0; c < colorsInPlay; c++)
+            if (!present[c] && board.Needs((ChipColor)c)) missing.Add((ChipColor)c);
+
+        if (missing.Count == 0) return null;
+        return missing[Random.Range(0, missing.Count)];
     }
 
     Vector3 SlotPosition(int i)

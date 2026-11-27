@@ -2368,7 +2368,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1, y: 0}
+  m_SizeDelta: {x: 1, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &599840602
 MonoBehaviour:
@@ -5429,7 +5429,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: -10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1347241272
 GameObject:
@@ -7268,6 +7268,7 @@ MonoBehaviour:
   pixelsPerUnit: 16
   slotCount: 38
   chipPrefab: {fileID: 5531765302557476626, guid: 8f88a5035b8b1884d812c166fbf412e5, type: 3}
+  board: {fileID: 342978874}
   startingChips: 0
   dropHeight: 1
   dropSlots: 1
@@ -12975,7 +12976,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 45.5, y: -15}
-  m_SizeDelta: {x: 11, y: 80}
+  m_SizeDelta: {x: 11, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2137304790
 MonoBehaviour:
