@@ -88,7 +88,17 @@ public class Menus : MonoBehaviour
             if (p) p.SetActive(p == panel);
         if (EventSystem.current) EventSystem.current.SetSelectedGameObject(null);
         rivetView.SetAside(panel != null);
+        rivetView.SetMood(MoodFor(panel));
         if (hud) hud.SetActive(panel == null);
+    }
+
+    RivetView.Mood MoodFor(GameObject panel)
+    {
+        if (panel == mainPanel) return RivetView.Mood.Wave;
+        if (panel == recordsPanel || panel == howToPanel) return RivetView.Mood.Read;
+        if (panel == gameOverPanel) return RivetView.Mood.Crying;
+        if (panel == newRecordPanel) return RivetView.Mood.Celebrate;
+        return RivetView.Mood.Idle;
     }
 
     public void Play()
