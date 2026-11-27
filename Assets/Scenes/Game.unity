@@ -4345,93 +4345,34 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'The goal in <color=#3B5DC9>Rivet Rush</color> is to complete blueprints
-    from the board(s) before the conveyor belt fills up completely.
-
-
-
-    The main
-    character, an assembly robot named <color=#3B5DC9>Rivet</color>, can interact
-    with the chips on the conveyor belt directly in front of him. Use the <color=#3B5DC9>"Space"</color>
-    key, a mouse <color=#3B5DC9>click</color>, or a <color=#3B5DC9>screen tap</color>
-    to perform an action.
-
-
-
-    -Keep an eye on the blueprints at the top of the
-    screen; they indicate exactly which chips are required and the order in which
-    they must be collected.
-
-    -Press the button when the desired chip reaches
-    the pickup zone in front of Rivet.
-
-    -Let unnecessary chips pass by - they
-    will loop back around.
-
-    -Complete a blueprint according to the board to earn
-    points. Successfully complete multiple blueprints in a row to earn a "streak"
-    bonus.
-
-    -Don''t make mistakes! If you grab a wrong chip or try to pick something
-    up from an empty slot, Rivet will drop everything currently on his tray back
-    onto the conveyor belt, and your streak will be broken.
-
-    -The game gradually
-    becomes faster and more challenging. Keep up the pace and try to score higher
-    than the top players.
-
-    -If the conveyor belt becomes completely full and
-    there is no room left for a new chip, the mechanism will jam, and the game will
-    end.
-
-
-
-    <color=#3B5DC9>Types of Chips</color>
-
-
-
-    <align=center><size=250%><sprite
-    name="ChipRed"> <sprite name="ChipBlue"> <sprite name="ChipGreen"></size></align>
-
-
-
-
-    <color=#3B5DC9>Coloured
-    chips:</color> Red, blue, and green chips are used to complete blueprints.
-
-
-
-    <align=center><size=250%><sprite
-    name="ChipYellow"></size></align>
-
-
-
-
-    Yellow chips are added to the mix later
-    on.
-
-
-
-    <align=center><size=250%><sprite name="ChipBurnt"></size></align>
-
-
-
-
-    <color=#3B5DC9>Burnt
-    chip:</color> This is junk that takes up space on your belt. Interact with it
+  m_text: "<color=#3B5DC9>Controls:</color>\r\n\"Space\" key, a mouse click, or a
+    screen tap \r\n\r\n<color=#3B5DC9>The goal:</color>\r\nComplete blueprints from
+    the board(s) above, using chips in front of <color=#3B5DC9>Rivet</color>.\r\n\r\n<color=#3B5DC9>Chips:</color>\r\n<align=center><size=250%><sprite
+    name=\"ChipRed\"> <sprite name=\"ChipBlue\"> <sprite name=\"ChipGreen\"></size></align>\r\n\r\n\r\nColoured
+    chips: <color=#3B5DC9>red, blue</color>, and <color=#3B5DC9>green</color>, are
+    used to complete blueprints.\r\n<align=center><size=250%><sprite name=\"ChipYellow\"></size></align>\r\n\r\n\r\n<color=#3B5DC9>Yellow</color>
+    chips are added to the mix later on.\r\n<align=center><size=250%><sprite name=\"ChipBurnt\"></size></align>\r\n\r\n\r\n<color=#3B5DC9>Burnt
+    chip.</color> This is junk that takes up space on your belt. Interact with it
     to destroy it. If your tray is empty, this action is free; however, if there
     are already chips on the tray, attempting to destroy a burnt chip will count
-    as a mistake.
-
-
-
-    <align=center><size=250%><sprite name="ChipRainbow"></size></align>
-
-
-
-
-    <color=#3B5DC9>Rainbow
-    chip:</color> This can act as a substitute for a chip of any colour.'
+    as a mistake.\r\n<align=center><size=250%><sprite name=\"ChipRainbow\"></size></align>\r\n\r\n\r\n<color=#3B5DC9>Rainbow
+    chip</color> can act as a substitute for a chip of any colour.\r\n\r\n<color=#3B5DC9>Rules:</color>\r\n\r\nThe
+    main character, an assembly robot named Rivet, can interact with the chips on
+    the conveyor belt directly in front of him.\r\n\r\nPress the button when the
+    desired chip reaches the pickup zone in front of Rivet.\r\n\r\nKeep an eye on
+    the blueprints at the top of the screen; they indicate exactly which chips are
+    required and the order in which they must be collected.\r\n\r\nLet unnecessary
+    chips pass by - they will loop back around.\r\n\r\nComplete a blueprint according
+    to the board to earn points. Successfully complete multiple blueprints in a row
+    to earn a \"streak\" bonus.\r\n\r\nDon't make mistakes! If you grab the wrong
+    chip or try to pick something up from an empty slot, Rivet will drop everything
+    currently on his tray back onto the conveyor belt, and your streak will be broken.\r\n\r\nThe
+    game gradually becomes faster and more challenging. Keep up the pace and try
+    to score higher than the top players.\r\n\r\nIf the conveyor belt becomes completely
+    full and there is no room left for a new chip, the mechanism will jam, and the
+    game will end.\r\n\r\n<color=#3B5DC9>Credits:</color>\r\n\r\nMusic: \"Itty Bitty
+    8 Bit\" Kevin MacLeod (incompetech.com)\r\nLicensed under Creative Commons: By
+    Attribution 4.0\r\n\r\nSound effects: Pixabay\r\n\r\nFont: Press Start 2P"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cbc89946fa764a44cb1048ff2aa5067b, type: 2}
   m_sharedMaterial: {fileID: -2840717597666584653, guid: cbc89946fa764a44cb1048ff2aa5067b, type: 2}
@@ -5223,7 +5164,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 771875925}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.07343851
+  m_Size: 0.06888554
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
