@@ -718,6 +718,7 @@ MonoBehaviour:
   cellSpacing: 1
   rowSpacing: 1.1875
   doneAlpha: 0.3
+  blockedAlpha: 0.3
 --- !u!4 &342978875
 Transform:
   m_ObjectHideFlags: 0
@@ -769,7 +770,6 @@ MonoBehaviour:
   pointsPerChip: 10
   streakThresholds: 050000000a00000014000000
   streakMultipliers: 020000000300000005000000
-  streakBrokenMin: 1
   hudText: {fileID: 1872121697}
 --- !u!4 &356889975
 Transform:
@@ -780,7 +780,7 @@ Transform:
   m_GameObject: {fileID: 356889973}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.3435, y: -0.75653, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1476,6 +1476,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 415790709}
   m_CullTransparentMesh: 1
+--- !u!1 &466676576
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 466676578}
+  - component: {fileID: 466676577}
+  m_Layer: 0
+  m_Name: GameSounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &466676577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466676576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab62be45dfd085f4a9f2cfb7fd83fba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameSounds
+  game: {fileID: 356889974}
+  rivet: {fileID: 1395376372}
+  belt: {fileID: 1783337260}
+  difficulty: {fileID: 356889976}
+  grab: Grab
+  build: Build
+  bonus: Bonus
+  fumble: Fumble
+  streakBroken: StreakBroken
+  burnt: Burnt
+  dispense: Dispense
+  levelUp: LevelUp
+  gameOver: GameOver
+  newRecord: NewRecord
+  click: Click
+--- !u!4 &466676578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466676576}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.28706, y: -0.52582, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &468863669
 GameObject:
   m_ObjectHideFlags: 0
@@ -2547,6 +2606,147 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629618076}
   m_CullTransparentMesh: 1
+--- !u!1 &631160157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 631160159}
+  - component: {fileID: 631160158}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &631160158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631160157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb147c6cc72e7948b19a987dd96916b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  sounds:
+  - name: Music
+    clip: {fileID: 8300000, guid: 4957bd551ca01444f82164056cb567a5, type: 3}
+    volume: 0.3
+    pitch: 1
+    pitchVariation: 0
+    loop: 1
+    playOnStart: 1
+    source: {fileID: 0}
+  - name: Grab
+    clip: {fileID: 8300000, guid: 0344fc89d4bc8ef4580601780758bc4f, type: 3}
+    volume: 1
+    pitch: 1
+    pitchVariation: 0
+    loop: 0
+    playOnStart: 0
+    source: {fileID: 0}
+  - name: Build
+    clip: {fileID: 8300000, guid: 38c2ff3e5f89ad34487d85cd503f3a3d, type: 3}
+    volume: 1
+    pitch: 1
+    pitchVariation: 0
+    loop: 0
+    playOnStart: 0
+    source: {fileID: 0}
+  - name: Bonus
+    clip: {fileID: 8300000, guid: b571d04563f6e1f4f99e5e23d6316f2e, type: 3}
+    volume: 1
+    pitch: 1
+    pitchVariation: 0
+    loop: 0
+    playOnStart: 0
+    source: {fileID: 0}
+  - name: Fumble
+    clip: {fileID: 8300000, guid: c660829bbe6d5294b872d2f856a97caf, type: 3}
+    volume: 0.75
+    pitch: 1
+    pitchVariation: 0
+    loop: 0
+    playOnStart: 0
+    source: {fileID: 0}
+  - name: StreakBroken
+    clip: {fileID: 8300000, guid: 72a65d83826473042848c40fd40f39d3, type: 3}
+    volume: 1
+    pitch: 1
+    pitchVariation: 0
+    loop: 0
+    playOnStart: 0
+    source: {fileID: 0}
+  - name: Burnt
+    clip: {fileID: 8300000, guid: 223e9dab04cea66429cc2dee49c7b76e, type: 3}
+    volume: 1
+    pitch: 1
+    pitchVariation: 0
+    loop: 0
+    playOnStart: 0
+    source: {fileID: 0}
+  - name: Dispense
+    clip: {fileID: 8300000, guid: 0be28c9cc08977d4690551be7098a509, type: 3}
+    volume: 1
+    pitch: 1
+    pitchVariation: 0
+    loop: 0
+    playOnStart: 0
+    source: {fileID: 0}
+  - name: LevelUp
+    clip: {fileID: 8300000, guid: 9fc0a88aedfec3d46bceb2d5a06b22d3, type: 3}
+    volume: 1
+    pitch: 1
+    pitchVariation: 0
+    loop: 0
+    playOnStart: 0
+    source: {fileID: 0}
+  - name: GameOver
+    clip: {fileID: 8300000, guid: c8ecb81313fe26c4197fd52cb03b19e4, type: 3}
+    volume: 1
+    pitch: 1
+    pitchVariation: 0
+    loop: 0
+    playOnStart: 0
+    source: {fileID: 0}
+  - name: NewRecord
+    clip: {fileID: 8300000, guid: ebdf87415b5a45e4b966a25356a381a1, type: 3}
+    volume: 1
+    pitch: 1
+    pitchVariation: 0
+    loop: 0
+    playOnStart: 0
+    source: {fileID: 0}
+  - name: Click
+    clip: {fileID: 8300000, guid: 620cb770725e499478a44cd3488374b2, type: 3}
+    volume: 1
+    pitch: 1
+    pitchVariation: 0
+    loop: 0
+    playOnStart: 0
+    source: {fileID: 0}
+--- !u!4 &631160159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 631160157}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &635222681
 GameObject:
   m_ObjectHideFlags: 0
@@ -12299,15 +12499,17 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 356889975}
   - {fileID: 519420032}
+  - {fileID: 356889975}
+  - {fileID: 631160159}
+  - {fileID: 466676578}
   - {fileID: 619394802}
   - {fileID: 264161903}
-  - {fileID: 611523983}
-  - {fileID: 1783337259}
   - {fileID: 342978875}
   - {fileID: 918603293}
   - {fileID: 1496824872}
+  - {fileID: 611523983}
+  - {fileID: 1783337259}
   - {fileID: 1395376373}
   - {fileID: 1949019701}
   - {fileID: 1915270872}

@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     public event System.Action GameEnded;
     public event System.Action<int, int> ScoreGained;
-    public event System.Action<int> StreakBroken;
+    public event System.Action StreakBroken;
 
     int score, streak, built;
 
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
 
     public void BreakStreak()
     {
-        if (MultiplierFor(streak) > 1) StreakBroken?.Invoke(streak);
+        if (MultiplierFor(streak) > 1) StreakBroken?.Invoke();
         streak = 0;
         UpdateHud();
     }

@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class Menus : MonoBehaviour
 {
@@ -52,10 +53,7 @@ public class Menus : MonoBehaviour
         game.GameEnded += OnGameEnded;
 
         if (nameInput)
-        {
             nameInput.characterLimit = maxNameLength;
-            nameInput.onSubmit.AddListener(_ => SaveAndRetry());
-        }
         if (exitButton && Application.platform == RuntimePlatform.WebGLPlayer)
             exitButton.SetActive(false);
     }
@@ -76,7 +74,8 @@ public class Menus : MonoBehaviour
 
     void Update()
     {
-        if (!OneButton.Pressed) return;
+        bool space = Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame;
+        if (!space) return;
 
         if (current == mainPanel) Play();
         else if (current == gameOverPanel && Time.time - gameOverShownAt > restartDelay) Retry();

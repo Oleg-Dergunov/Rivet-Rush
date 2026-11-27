@@ -45,7 +45,7 @@ public class ScorePopups : MonoBehaviour
         Spawn(text, pointsColor, 0f);
     }
 
-    void ShowBroken(int lostStreak) => Spawn(brokenText, brokenColor, 0f);
+    void ShowBroken() => Spawn(brokenText, brokenColor, 0f);
 
     void ShowLevel(string announce) => Spawn(announce, levelColor, levelDelay);
 

@@ -24,6 +24,8 @@ public class RivetController : MonoBehaviour
     public event Action Built;
     public event Action Fumbled;
 
+    public event Action BurntDestroyed;
+
     readonly List<ChipData> tray = new();
     readonly List<ChipView> trayIcons = new();
 
@@ -49,6 +51,7 @@ public class RivetController : MonoBehaviour
         if (chip.kind == ChipKind.Burnt)
         {
             belt.Discard(slot);
+            BurntDestroyed?.Invoke();
             if (tray.Count > 0) Fumble();
             else PickedUp?.Invoke();
             return;
